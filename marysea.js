@@ -73,7 +73,9 @@ app.post('/api/maryseaSkill', async (req, res) => {
 
         var isCorrectAnswer = contain(answers[sessionItem.step], original_utterance.split(" ")[0])
         console.log("sessionItem.step: " + sessionItem.step + "isCorrectAnswer: " + isCorrectAnswer)
+        var sound = "<speaker audio=marusia-sounds/game-boot-1> ";
         if (isCorrectAnswer) {
+            sound = "<speaker audio=marusia-sounds/game-8-bit-coin-1>";
             sessionItem['category'] = sessionItem.step
         }
         sessionItem.step = sessionItem.step + 1
@@ -118,7 +120,7 @@ app.post('/api/maryseaSkill', async (req, res) => {
 
         requestOut.response = {
             "text": questions[sessionItem.step],
-            "tts": "<speaker audio=marusia-sounds/game-8-bit-coin-1> " + questionsTTS[sessionItem.step],
+            "tts": sound + " " + questionsTTS[sessionItem.step],
             "card": {
                 "type": "BigImage",
                 "image_id": 457239017 + sessionItem.step
@@ -150,7 +152,7 @@ app.post('/api/maryseaSkill', async (req, res) => {
     if (contain(original_utterance, "начать")) {
         requestOut.response = {
             "text": questions[0],
-            "tts": "<speaker audio=marusia-sounds/music-gong-1>  " + questions[0],
+            "tts": questions[0],
             "card": {
                 "type": "BigImage",
                 "image_id": 457239017
